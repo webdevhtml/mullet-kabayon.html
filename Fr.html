@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>game</title>
+  <style>
+    body {
+      background-color: #fffA45;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 60px;
+    }
+
+    #score {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #gameContainer {
+      margin-top: 50px;
+    }
+
+    .target {
+      width: 200px;
+      height: 200px;
+      background-image: url('io.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      position: absolute;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tap the mullet</h1>
+
+  <div id="score">Score: <span id="scoreValue">0</span></div>
+
+  <div id="gameContainer"></div>
+
+  <script>
+    var score = 0;
+
+    function updateScore() {
+      var scoreValue = document.getElementById("scoreValue");
+      scoreValue.textContent = score;
+    }
+
+    function addTarget() {
+      var gameContainer = document.getElementById("gameContainer");
+      var target = document.createElement("div");
+      target.className = "target";
+      target.style.left = Math.random() * (gameContainer.offsetWidth - 100) + "px";
+      target.style.top = Math.random() * (gameContainer.offsetHeight - 100) + "px";
+      target.addEventListener("click", function() {
+        score++;
+        gameContainer.removeChild(target);
+        updateScore();
+      });
+      gameContainer.appendChild(target);
+    }
+
+    setInterval(addTarget, 1000);
+  </script>
+</body>
+</html>
